@@ -43,5 +43,29 @@ namespace EShopApi.Controllers
             return NoContent();
         }
 
+        [HttpPost]
+        public async Task<ActionResult<SalesPersons>> PostSalesPersons(SalesPersons salesPersons)
+        {
+            await _salesPersonRepository.Add(salesPersons);
+            return CreatedAtAction("GetSalesPersons", new {id = salesPersons.SalesPersonsId}, salesPersons);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<SalesPersons>> DeleteSalesPErsons(int id)
+        {
+            var salesPersons = await _salesPersonRepository.Find(id);
+            if(salesPersons == null)
+            {
+                return NotFound();
+            }
+
+            await _salesPersonRepository.Remove(id);
+            return salesPersons;
+        }
+
+        private async Task<bool> SalesPersonsExists(int id)
+        {
+            return await _salesPersonRepository.IsExist(id);
+        }
     }
 }
