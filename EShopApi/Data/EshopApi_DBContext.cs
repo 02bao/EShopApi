@@ -46,7 +46,7 @@ namespace EShopApi.Data
             {
                 entity.HasKey(e => e.OrderId);
 
-                entity.Property(e => e.Date).HasColumnType("datetime");
+                //entity.Property(e => e.Date).HasColumnType("datetime");
 
                 entity.Property(e => e.Status).HasMaxLength(150);
 
