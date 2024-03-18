@@ -1,4 +1,6 @@
-﻿namespace EShopApi.Models
+﻿using NuGet.Packaging.Signing;
+
+namespace EShopApi.Models
 {
     public partial class Orders
     {

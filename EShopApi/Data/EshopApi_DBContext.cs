@@ -20,25 +20,34 @@ namespace EShopApi.Data
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<SalesPersons> SalesPersons { get; set; }
 
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>(entity =>
             {
                 entity.Property(e => e.Address).HasMaxLength(150);
+
                 entity.Property(e => e.City).HasMaxLength(150);
+
                 entity.Property(e => e.Email).HasMaxLength(150);
+
                 entity.Property(e => e.FirstName).HasMaxLength(150);
+
                 entity.Property(e => e.LastName).HasMaxLength(150);
+
                 entity.Property(e => e.Phone).HasMaxLength(150);
+
                 entity.Property(e => e.State).HasMaxLength(150);
+
                 entity.Property(e => e.ZipCode).HasMaxLength(150);
             });
 
             modelBuilder.Entity<Orders>(entity =>
             {
                 entity.HasKey(e => e.OrderId);
+
                 entity.Property(e => e.Date).HasColumnType("datetime");
+
                 entity.Property(e => e.Status).HasMaxLength(150);
 
                 entity.HasOne(d => d.Customer)
@@ -47,12 +56,11 @@ namespace EShopApi.Data
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Orders_Customer");
 
-                entity.HasOne(d =>d.SalesPersons)
+                entity.HasOne(d => d.SalesPersons)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.SalesPersonId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Orders_SalesPersons");
-
             });
 
             modelBuilder.Entity<OrdersItems>(entity =>
@@ -60,33 +68,41 @@ namespace EShopApi.Data
                 entity.HasKey(e => e.OrderItemId);
 
                 entity.HasOne(d => d.Order)
-                   .WithMany(p => p.OrdersItems)
-                   .HasForeignKey(d => d.OrderId)
-                   .OnDelete(DeleteBehavior.ClientSetNull)
-                   .HasConstraintName("FK_Orders_Orders");
+                    .WithMany(p => p.OrdersItems)
+                    .HasForeignKey(d => d.OrderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OrdersItems_Orders");
 
                 entity.HasOne(d => d.Product)
-                  .WithMany(p => p.OrdersItems)
-                  .HasForeignKey(d => d.ProductId)
-                  .OnDelete(DeleteBehavior.ClientSetNull)
-                  .HasConstraintName("FK_Orders_Products");
+                    .WithMany(p => p.OrdersItems)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OrdersItems_Products");
             });
 
             modelBuilder.Entity<Products>(entity =>
             {
                 entity.Property(e => e.ProductsName).HasMaxLength(150);
+
                 entity.Property(e => e.Status).HasMaxLength(150);
+
                 entity.Property(e => e.Varienty).HasMaxLength(150);
             });
 
             modelBuilder.Entity<SalesPersons>(entity =>
             {
                 entity.Property(e => e.Address).HasMaxLength(150);
+
                 entity.Property(e => e.City).HasMaxLength(150);
+
                 entity.Property(e => e.Email).HasMaxLength(150);
+
                 entity.Property(e => e.FirstName).HasMaxLength(150);
+
                 entity.Property(e => e.LastName).HasMaxLength(150);
+
                 entity.Property(e => e.State).HasMaxLength(150);
+
                 entity.Property(e => e.ZipCode).HasMaxLength(150);
             });
 
