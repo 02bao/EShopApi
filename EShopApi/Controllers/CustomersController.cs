@@ -8,12 +8,11 @@ namespace EShopApi.Contracts
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(AuthenticationSchemes ="Bearer")]
-    public class CuxtomersController : ControllerBase
+    public class CustomersController : ControllerBase
     {
         private readonly ICustomerRepository _customerRepository;
 
-        public CuxtomersController(ICustomerRepository customerRepository)
+        public CustomersController(ICustomerRepository customerRepository)
         {
             _customerRepository = customerRepository;
         }

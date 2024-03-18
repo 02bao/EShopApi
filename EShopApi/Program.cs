@@ -1,5 +1,7 @@
 
+using EShopApi.Contracts;
 using EShopApi.Data;
+using EShopApi.Repositories;
 
 namespace EShopApi
 {
@@ -16,7 +18,9 @@ namespace EShopApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<EshopApi_DBContext>();
-
+            builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
+            builder.Services.AddTransient<IProductRepository, ProductRepository>();
+            builder.Services.AddTransient<ISalesPersonRepository, SalesPersonRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -18,11 +18,12 @@ namespace EShopApi.Controllers
             {
                 return BadRequest("Username or password is required");
             }
-            if (login.name.ToLower() != "Kamran" || login.password.ToLower() != "123")
+            if (login.name.ToLower() != "kamran" || login.password.ToLower() != "123")
             {
                 return Unauthorized();
             }
-            var secretkey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("OurFirst.NetCore3RestApiForTestWithJwt"));
+            var secretkey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("cf83e1357eefb8bdf1542850d66d8007d620e4050b" +
+                "5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e"));
             var signedCretin = new SigningCredentials(secretkey, SecurityAlgorithms.HmacSha512);
             var tokenOption =
                 new JwtSecurityToken(issuer: "http://localhost:53119",
